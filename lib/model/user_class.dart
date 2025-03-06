@@ -2,12 +2,14 @@ class User {
   final String nombre;
   final String email;
   final String password;
+  final String tipo; // Nuevo parámetro para el tipo de usuario
 
   // Constructor
   User({
     required this.nombre,
     required this.email,
     required this.password,
+    required this.tipo,
   });
 
   // Método para convertir el objeto a un mapa (JSON)
@@ -16,6 +18,7 @@ class User {
       'nombre': nombre,
       'email': email,
       'password': password,
+      'tipo': tipo,
     };
   }
 
@@ -25,6 +28,7 @@ class User {
       nombre: json['nombre'],
       email: json['email'],
       password: json['password'],
+      tipo: json['tipo'] ?? 'usuario', // Por defecto, usuario
     );
   }
 

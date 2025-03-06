@@ -1,4 +1,3 @@
-// registro.dart
 import 'package:flutter/material.dart';
 import 'package:caribe/model/user_class.dart'; // Asegúrate de importar el modelo User
 import 'package:caribe/pages/login_page.dart'; // Importamos la pantalla de Login
@@ -15,6 +14,7 @@ class _RegistroState extends State<Registro> {
   final _nombreController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  bool _esArtesano = false; // Estado para el checkbox
 
   // Función para manejar el registro
   void _registrarUsuario() {
@@ -23,6 +23,7 @@ class _RegistroState extends State<Registro> {
         nombre: _nombreController.text,
         email: _emailController.text,
         password: _passwordController.text,
+        tipo: _esArtesano ? 'artesano' : 'usuario',
       );
 
       final userJson = nuevoUsuario.toJson();
@@ -122,6 +123,22 @@ class _RegistroState extends State<Registro> {
                       }
                       return null;
                     },
+                  ),
+                  const SizedBox(height: 16.0),
+
+                  // Checkbox para determinar si es artesano
+                  Row(
+                    children: [
+                      Checkbox(
+                        value: _esArtesano,
+                        onChanged: (value) {
+                          setState(() {
+                            _esArtesano = value!;
+                          });
+                        },
+                      ),
+                      const Text('¿Eres artesano?'),
+                    ],
                   ),
                   const SizedBox(height: 30.0),
 

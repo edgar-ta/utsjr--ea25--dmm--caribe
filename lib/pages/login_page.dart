@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:caribe/model/user_class.dart'; // Importa el modelo User
 import 'package:caribe/pages/home_page.dart'; // Importa la pantalla Home
 import 'package:caribe/pages/sign_page.dart';
+import 'package:caribe/pages/home_art_page.dart'; // Importa la pantalla Home para artesanos
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -15,12 +16,18 @@ class _LoginState extends State<Login> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
-  // Lista de usuarios simulados (esto puede ser reemplazado por una base de datos real)
+  // Lista de usuarios simulados con diferentes tipos
   final List<User> _usuarios = [
     User(
-        nombre: 'Juan Pérez', email: 'usuario@example.com', password: '123456'),
+        nombre: 'Juan Pérez',
+        email: 'usuario@example.com',
+        password: '123456',
+        tipo: 'usuario'),
     User(
-        nombre: 'Ana Gómez', email: 'ana@example.com', password: 'password123'),
+        nombre: 'Ana Gómez',
+        email: 'ana@example.com',
+        password: 'password123',
+        tipo: 'artesano'),
   ];
 
   // Lógica de autenticación
@@ -33,11 +40,18 @@ class _LoginState extends State<Login> {
       User? user = User.validateCredentials(email, password, _usuarios);
 
       if (user != null) {
-        // Si el usuario existe, redirigimos al Home
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const Home()),
-        );
+        // Redirigir a la pantalla correspondiente según el tipo de usuario
+        if (user.tipo == 'usuario') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const Home()),
+          );
+        } else if (user.tipo == 'artesano') {
+          Navigator.pushReplacement(
+            context,
+            MaterialPageRoute(builder: (context) => const ArtesanoHome()),
+          );
+        }
       } else {
         // Si las credenciales son incorrectas, mostramos un mensaje de error
         ScaffoldMessenger.of(context).showSnackBar(
