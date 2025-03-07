@@ -4,6 +4,16 @@ import 'package:caribe/pages/login_page.dart'; // Importamos la pantalla de Logi
 import 'package:caribe/pages/home_page.dart'; // Importamos la pantalla de Home
 import 'package:caribe/pages/home_art_page.dart'; // Importamos la pantalla de Home para artesanos
 
+// Definir la paleta de colores
+class AppColors {
+  static const Color azulCieloTropical = Color(0xFF87CEEB);
+  static const Color naranjaAtardecer = Color(0xFFFF8C00);
+  static const Color arenaCalida = Color(0xFFF5F5DC);
+  static const Color blancoNitido = Color(0xFFFFFFFF);
+  static const Color negroProfundo = Color(0xFF000000);
+  static const Color grisSuave = Color(0xFFD3D3D3);
+}
+
 class Registro extends StatefulWidget {
   const Registro({super.key});
 
@@ -57,6 +67,8 @@ class _RegistroState extends State<Registro> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor:
+          AppColors.arenaCalida, // Fondo claro para la pantalla de registro
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -89,6 +101,7 @@ class _RegistroState extends State<Registro> {
                             style: TextStyle(
                               fontSize: 16, // Tamaño de la fuente ajustado
                               fontWeight: FontWeight.bold,
+                              color: AppColors.azulCieloTropical,
                             ),
                           ),
                         ),
@@ -165,7 +178,9 @@ class _RegistroState extends State<Registro> {
                                 });
                               },
                             ),
-                            const Text('¿Eres artesano?'),
+                            const Text('¿Eres artesano?',
+                                style: TextStyle(
+                                    color: AppColors.azulCieloTropical)),
                           ],
                         ),
                         const SizedBox(height: 14.0),
@@ -179,6 +194,7 @@ class _RegistroState extends State<Registro> {
                                     0.65, // Ajustamos el tamaño del botón al 65% del ancho de la pantalla
                                 50,
                               ),
+                              backgroundColor: AppColors.naranjaAtardecer,
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -207,7 +223,8 @@ class _RegistroState extends State<Registro> {
                             child: const Text(
                               '¿Ya tienes cuenta? Iniciar sesión',
                               style: TextStyle(
-                                  fontSize: 12.0), // Reducir tamaño del texto
+                                  fontSize: 12.0,
+                                  color: AppColors.azulCieloTropical),
                             ),
                           ),
                         ),

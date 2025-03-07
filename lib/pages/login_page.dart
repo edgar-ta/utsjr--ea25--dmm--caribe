@@ -4,6 +4,16 @@ import 'package:caribe/pages/home_page.dart'; // Importa la pantalla Home
 import 'package:caribe/pages/sign_page.dart';
 import 'package:caribe/pages/home_art_page.dart'; // Importa la pantalla Home para artesanos
 
+// Definimos los colores globales de la aplicación
+class AppColors {
+  static const Color azulCieloTropical = Color(0xFF87CEEB);
+  static const Color naranjaAtardecer = Color(0xFFFF8C00);
+  static const Color arenaCalida = Color(0xFFF5F5DC);
+  static const Color blancoNitido = Color(0xFFFFFFFF);
+  static const Color negroProfundo = Color(0xFF000000);
+  static const Color grisSuave = Color(0xFFD3D3D3);
+}
+
 class Login extends StatefulWidget {
   const Login({super.key});
 
@@ -68,6 +78,7 @@ class _LoginState extends State<Login> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      backgroundColor: AppColors.arenaCalida, // Fondo claro para la pantalla
       body: SingleChildScrollView(
         child: Column(
           children: [
@@ -88,8 +99,7 @@ class _LoginState extends State<Login> {
                 ),
                 elevation: 6.0, // Elevación más suave
                 child: Padding(
-                  padding: const EdgeInsets.all(
-                      16.0), // Padding más pequeño para el card
+                  padding: const EdgeInsets.all(16.0),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -99,9 +109,10 @@ class _LoginState extends State<Login> {
                           child: Text(
                             'Iniciar sesión',
                             style: TextStyle(
-                              fontSize:
-                                  16, // Tamaño de la fuente ajustado para que no sea tan grande
+                              fontSize: 16, // Tamaño de la fuente ajustado
                               fontWeight: FontWeight.bold,
+                              color: AppColors
+                                  .azulCieloTropical, // Color del texto
                             ),
                           ),
                         ),
@@ -110,10 +121,17 @@ class _LoginState extends State<Login> {
                         // Campo Email
                         TextFormField(
                           controller: _emailController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: 'Correo electrónico',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.symmetric(
+                            labelStyle: TextStyle(
+                                color: AppColors
+                                    .azulCieloTropical), // Color del label
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppColors
+                                      .azulCieloTropical), // Color del borde
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 10.0),
                           ),
                           keyboardType: TextInputType.emailAddress,
@@ -133,10 +151,17 @@ class _LoginState extends State<Login> {
                         // Campo Contraseña
                         TextFormField(
                           controller: _passwordController,
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             labelText: 'Contraseña',
-                            border: OutlineInputBorder(),
-                            contentPadding: EdgeInsets.symmetric(
+                            labelStyle: TextStyle(
+                                color: AppColors
+                                    .azulCieloTropical), // Color del label
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: AppColors
+                                      .azulCieloTropical), // Color del borde
+                            ),
+                            contentPadding: const EdgeInsets.symmetric(
                                 vertical: 12.0, horizontal: 10.0),
                           ),
                           obscureText: true,
@@ -155,9 +180,11 @@ class _LoginState extends State<Login> {
                             style: ElevatedButton.styleFrom(
                               minimumSize: Size(
                                 screenWidth *
-                                    0.65, // Ajustamos el tamaño del botón al 85% del ancho de la pantalla
+                                    0.65, // Ajustamos el tamaño del botón al 65% del ancho de la pantalla
                                 50,
                               ),
+                              backgroundColor: AppColors
+                                  .naranjaAtardecer, // Color de fondo del botón
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
@@ -186,7 +213,9 @@ class _LoginState extends State<Login> {
                             child: const Text(
                               '¿No tienes cuenta? Regístrate',
                               style: TextStyle(
-                                  fontSize: 12.0), // Reducir tamaño del texto
+                                  fontSize: 12.0,
+                                  color: AppColors
+                                      .azulCieloTropical), // Color del texto
                             ),
                           ),
                         ),
