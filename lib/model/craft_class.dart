@@ -18,4 +18,6 @@ class CraftClass {
     required this.rating,
     required this.reviews,
   });
+
+  get imageFile => null;
 }
