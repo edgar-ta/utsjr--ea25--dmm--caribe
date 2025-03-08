@@ -1,4 +1,5 @@
-import 'package:caribe/pages/sign_page.dart';
+import 'package:caribe/pages/home_page.dart';
+//import 'package:caribe/pages/sign_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -12,7 +13,8 @@ class MainApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Registro(),
+      //home: Registro(),
+      home: Home(),
     );
   }
 }
