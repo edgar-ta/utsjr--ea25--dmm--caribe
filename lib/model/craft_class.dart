@@ -1,13 +1,15 @@
-import 'package:flutter/material.dart';
+// craft_class.dart
+import 'dart:io'; // Para manejar archivos locales de imágenes
 
 class CraftClass {
-  final String imageUrl;
-  final String artisanName;
-  final String profileImageUrl;
-  final double price;
-  final String title;
-  final double rating;
-  final int reviews;
+  String imageUrl;
+  String artisanName;
+  String profileImageUrl;
+  double price;
+  String title;
+  double rating;
+  int reviews;
+  File? imageFile; // Propiedad opcional para la imagen del producto
 
   CraftClass({
     required this.imageUrl,
@@ -17,7 +19,6 @@ class CraftClass {
     required this.title,
     required this.rating,
     required this.reviews,
+    this.imageFile,
   });
-
-  get imageFile => null;
 }
