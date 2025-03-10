@@ -9,6 +9,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  firebase_core: ^3.12.1
+  firebase_auth: ^5.5.1
+  cloud_firestore: ^5.6.5
+  carousel_slider: ^5.0.0
+  image_picker: ^1.1.2
+
 
 dev_dependencies:
   flutter_test:
@@ -19,3 +25,7 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/logotipo.png
+    - assets/images/logotipo_largo.png
+    - assets/images/sombrero_charro.jpg
+    - assets/images/mascara_madera.jpg
+    - assets/images/alebrije.jpg

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "758475553455",
+    "project_id": "caribe-6d583",
+    "storage_bucket": "caribe-6d583.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:758475553455:android:8292d39ed0c309590a725a",
+        "android_client_info": {
+          "package_name": "com.example.caribe"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADSCdPm9gRano6Jfm24zDELAnXeGk04hc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
