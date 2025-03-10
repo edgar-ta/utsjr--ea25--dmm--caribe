@@ -11,6 +11,7 @@ class ArtisanCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 460,
       width: 300,
       padding: const EdgeInsets.all(16.0),
       decoration: BoxDecoration(
