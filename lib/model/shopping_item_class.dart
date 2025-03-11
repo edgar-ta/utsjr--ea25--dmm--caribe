@@ -4,7 +4,7 @@ class ShoppingItemClass {
   final String id;
   final String userId;
   final String craftId;
-  final int quantity;
+  int quantity;
 
   ShoppingItemClass({
     required this.id,

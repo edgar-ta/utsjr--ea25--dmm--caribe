@@ -11,6 +11,7 @@ class CraftClass {
   String title;
   double rating;
   int reviews;
+  int quantity = 0;
 
   CraftClass({
     required this.id,
@@ -20,6 +21,7 @@ class CraftClass {
     required this.title,
     required this.rating,
     required this.reviews,
+    required this.quantity,
   });
 
   ArtisanClass getArtisan() {
@@ -36,6 +38,7 @@ class CraftClass {
       artisanId: 'artisan1',
       rating: 4.5,
       reviews: 23,
+      quantity: 10,
     ),
     CraftClass(
       id: "craft2",
@@ -45,6 +48,7 @@ class CraftClass {
       artisanId: 'artisan2',
       rating: 4.2,
       reviews: 15,
+      quantity: 5,
     ),
     CraftClass(
       id: "craft3",
@@ -54,6 +58,7 @@ class CraftClass {
       artisanId: 'artisan3',
       rating: 4.8,
       reviews: 42,
+      quantity: 3,
     ),
     CraftClass(
       id: "craft4",
@@ -63,6 +68,7 @@ class CraftClass {
       artisanId: 'artisan1',
       rating: 4.7,
       reviews: 15,
+      quantity: 8,
     ),
     CraftClass(
       id: "craft5",
@@ -72,6 +78,7 @@ class CraftClass {
       artisanId: 'artisan2',
       rating: 5.0,
       reviews: 8,
+      quantity: 6,
     ),
   ];
 }

@@ -1,3 +1,4 @@
+import 'package:caribe/components/iconic_button.dart';
 import 'package:caribe/components/shopping_item_card.dart';
 import 'package:caribe/components/typography/section_title.dart';
 import 'package:caribe/model/shopping_item_class.dart';
@@ -5,37 +6,27 @@ import 'package:flutter/material.dart';
 import 'package:caribe/styles/app_colors.dart';
 
 class UserShoppingCartScreen extends StatefulWidget {
-  const UserShoppingCartScreen({super.key});
+  List<ShoppingItemClass> Function() getShoppingItems;
+  void Function(int index) onMore;
+  void Function(int index) onLess;
+  void Function() makePayment;
+
+  UserShoppingCartScreen({
+    super.key,
+    required this.getShoppingItems,
+    required this.onMore,
+    required this.onLess,
+    required this.makePayment,
+  });
 
   @override
   _UserShoppingCartScreenState createState() => _UserShoppingCartScreenState();
 }
 
 class _UserShoppingCartScreenState extends State<UserShoppingCartScreen> {
-  List<ShoppingItemClass> shoppingItems = [
-    ShoppingItemClass(
-      id: "item1",
-      userId: "user1",
-      craftId: "craft1",
-      quantity: 2,
-    ),
-    ShoppingItemClass(
-      id: "item2",
-      userId: "user1",
-      craftId: "craft2",
-      quantity: 1,
-    ),
-    ShoppingItemClass(
-      id: "item3",
-      userId: "user1",
-      craftId: "craft3",
-      quantity: 3,
-    ),
-  ];
-
   @override
   Widget build(BuildContext context) {
-    double totalPrice = shoppingItems.fold(
+    double totalPrice = widget.getShoppingItems().fold(
         0, (previousValue, element) => previousValue + element.getTotalPrice());
 
     return Padding(
@@ -47,17 +38,17 @@ class _UserShoppingCartScreenState extends State<UserShoppingCartScreen> {
           const SizedBox(height: 20),
           Expanded(
             child: ListView.builder(
-              itemCount: shoppingItems.length,
+              itemCount: widget.getShoppingItems().length,
               itemBuilder: (context, index) {
                 return ShoppingItemCard(
-                  item: shoppingItems[index],
+                  item: widget.getShoppingItems()[index],
                   onRemoved: () {
                     setState(() {
-                      shoppingItems.removeAt(index);
+                      widget.getShoppingItems().removeAt(index);
                     });
                   },
-                  onMore: () {},
-                  onLess: () {},
+                  onMore: () => widget.onMore(index),
+                  onLess: () => widget.onLess(index),
                 );
               },
             ),
@@ -65,7 +56,7 @@ class _UserShoppingCartScreenState extends State<UserShoppingCartScreen> {
           // Total y botones de acción
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 20.0),
-            child: Row(
+            child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
@@ -73,21 +64,14 @@ class _UserShoppingCartScreenState extends State<UserShoppingCartScreen> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
-                    color: Colors.orange,
                   ),
                 ),
-                ElevatedButton(
-                  onPressed: () {
-                    // Aquí se puede agregar lógica para el proceso de pago
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                          content: Text('Proceso de pago en desarrollo...')),
-                    );
-                  },
-                  child: const Text('Pagar'),
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: AppColors.naranjaAtardecer,
-                  ),
+                SizedBox(height: 12),
+                IconicButton(
+                  label: "Pagar",
+                  icon: Icons.payment,
+                  onPressed: widget.makePayment,
+                  isEnabled: widget.getShoppingItems().isNotEmpty,
                 ),
               ],
             ),

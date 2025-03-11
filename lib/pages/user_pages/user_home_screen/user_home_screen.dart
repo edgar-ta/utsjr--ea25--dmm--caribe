@@ -1,5 +1,6 @@
 import 'package:caribe/components/artisan_card.dart';
 import 'package:caribe/components/craft_card.dart';
+import 'package:caribe/model/shopping_item_class.dart';
 import 'package:caribe/pages/user_pages/user_home_screen/category_grid.dart';
 import 'package:caribe/components/typography/section_title.dart';
 import 'package:caribe/model/artisan_class.dart';
@@ -7,14 +8,21 @@ import 'package:caribe/model/craft_class.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class UserSearchScreen extends StatefulWidget {
-  const UserSearchScreen({super.key});
+class UserHomeScreen extends StatefulWidget {
+  final List<ShoppingItemClass> Function() getShoppingItems;
+  final void Function(String) onItemAdded;
+
+  const UserHomeScreen({
+    super.key,
+    required this.getShoppingItems,
+    required this.onItemAdded,
+  });
 
   @override
-  State<UserSearchScreen> createState() => _UserSearchScreenState();
+  State<UserHomeScreen> createState() => _UserHomeScreenState();
 }
 
-class _UserSearchScreenState extends State<UserSearchScreen> {
+class _UserHomeScreenState extends State<UserHomeScreen> {
   final List<Map<String, String>> _artesanias = [
     {
       'image': 'assets/images/crafts/sombrero_charro.jpg',
@@ -97,8 +105,10 @@ class _UserSearchScreenState extends State<UserSearchScreen> {
             items: List.generate(
               CraftClass.crafts.length,
               (index) => CraftCard(
-                craft: CraftClass.crafts[index],
-              ),
+                  craft: CraftClass.crafts[index],
+                  onItemAdded: widget.onItemAdded,
+                  canAddToCart: widget.getShoppingItems().every((element) =>
+                      element.craftId != CraftClass.crafts[index].id)),
             ),
             options: CarouselOptions(
               height: 450,

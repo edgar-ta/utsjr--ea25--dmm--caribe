@@ -6,6 +6,8 @@ class IconicButton extends StatelessWidget {
   final Color foregroundColor;
   final Color backgroundColor;
   final IconData icon;
+  final void Function()? onPressed;
+  final bool isEnabled;
 
   const IconicButton({
     super.key,
@@ -13,6 +15,8 @@ class IconicButton extends StatelessWidget {
     required this.icon,
     this.foregroundColor = AppColors.arenaCalida,
     this.backgroundColor = AppColors.naranjaAtardecer,
+    this.isEnabled = true,
+    this.onPressed,
   });
 
   @override
@@ -21,7 +25,11 @@ class IconicButton extends StatelessWidget {
       height: 36,
       width: double.infinity,
       child: ElevatedButton.icon(
-        onPressed: () {},
+        onPressed: () {
+          if (isEnabled) {
+            onPressed?.call();
+          }
+        },
         label: Text(label),
         icon: Icon(
           icon,
@@ -29,9 +37,10 @@ class IconicButton extends StatelessWidget {
         ),
         style: ButtonStyle(
           backgroundColor: WidgetStateProperty.all(
-            backgroundColor,
+            isEnabled ? backgroundColor : foregroundColor,
           ),
-          foregroundColor: WidgetStateProperty.all(foregroundColor),
+          foregroundColor: WidgetStateProperty.all(
+              isEnabled ? foregroundColor : backgroundColor),
           shape: WidgetStateProperty.all(
             ContinuousRectangleBorder(),
           ),

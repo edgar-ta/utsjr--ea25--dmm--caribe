@@ -10,8 +10,15 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CraftCard extends StatelessWidget {
   final CraftClass craft;
+  final void Function(String)? onItemAdded;
+  final bool canAddToCart;
 
-  const CraftCard({Key? key, required this.craft}) : super(key: key);
+  CraftCard({
+    Key? key,
+    required this.craft,
+    this.onItemAdded,
+    this.canAddToCart = true,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -64,13 +71,28 @@ class CraftCard extends StatelessWidget {
                       height: 12,
                     ),
                     Expanded(
-                      child: Text(
-                        craft.title,
-                        textAlign: TextAlign.left,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
-                        ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            craft.title,
+                            textAlign: TextAlign.left,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          Text(
+                            craft.quantity > 1
+                                ? (craft.quantity != 1
+                                    ? "${craft.quantity} disponibles"
+                                    : "Uno solo disponible")
+                                : "Sin unidades disponibles",
+                            style: TextStyle(
+                              fontSize: 12,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                     SizedBox(
@@ -96,6 +118,8 @@ class CraftCard extends StatelessWidget {
                     IconicButton(
                       label: "Añadir al carrito",
                       icon: Icons.shopping_cart,
+                      onPressed: () => onItemAdded?.call(this.craft.id),
+                      isEnabled: canAddToCart && craft.quantity > 0,
                     ),
                   ],
                 ),
