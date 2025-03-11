@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:caribe/components/artisan_card.dart';
+import 'package:caribe/model/artisan_class.dart';
 import 'package:flutter/material.dart';
 import 'package:caribe/model/craft_class.dart';
 
@@ -33,6 +35,7 @@ class _CraftCardState extends State<CraftCard> {
 
   @override
   Widget build(BuildContext context) {
+    ArtisanClass artisan = widget.craft.getArtisan();
     return Container(
       width: 250,
       padding: const EdgeInsets.all(12),
@@ -53,18 +56,12 @@ class _CraftCardState extends State<CraftCard> {
           // Imagen del producto (Maneja URL o archivo local)
           ClipRRect(
             borderRadius: BorderRadius.circular(8),
-            child: widget.craft.imageFile != null
-                ? Image.file(widget.craft.imageFile!,
-                    height: 120, width: double.infinity, fit: BoxFit.cover)
-                : widget.craft.imageUrl != null
-                    ? Image.network(widget.craft.imageUrl!,
-                        height: 120, width: double.infinity, fit: BoxFit.cover)
-                    : Container(
-                        height: 120,
-                        width: double.infinity,
-                        color: Colors.grey[300],
-                        child: const Icon(Icons.image_not_supported, size: 50),
-                      ),
+            child: Image.network(
+              widget.craft.imageUrl!,
+              height: 120,
+              width: double.infinity,
+              fit: BoxFit.cover,
+            ),
           ),
           const SizedBox(height: 8),
 
@@ -76,11 +73,11 @@ class _CraftCardState extends State<CraftCard> {
                 children: [
                   CircleAvatar(
                     radius: 12,
-                    backgroundImage: NetworkImage(widget.craft.profileImageUrl),
+                    backgroundImage: NetworkImage(artisan.profilePicture),
                     backgroundColor: Colors.grey[300],
                   ),
                   const SizedBox(width: 6),
-                  Text(widget.craft.artisanName,
+                  Text(artisan.name,
                       style: const TextStyle(
                           fontSize: 12, fontWeight: FontWeight.w500)),
                 ],

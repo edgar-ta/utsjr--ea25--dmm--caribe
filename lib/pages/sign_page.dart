@@ -1,18 +1,9 @@
+import 'package:caribe/pages/user_pages/user_home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:caribe/model/user_class.dart'; // Asegúrate de importar el modelo User
-import 'package:caribe/pages/login_page.dart'; // Importamos la pantalla de Login
-import 'package:caribe/pages/home_page.dart'; // Importamos la pantalla de Home
-import 'package:caribe/pages/home_art_page.dart'; // Importamos la pantalla de Home para artesanos
-
-// Definir la paleta de colores
-class AppColors {
-  static const Color azulCieloTropical = Color(0xFF87CEEB);
-  static const Color naranjaAtardecer = Color(0xFFFF8C00);
-  static const Color arenaCalida = Color(0xFFF5F5DC);
-  static const Color blancoNitido = Color(0xFFFFFFFF);
-  static const Color negroProfundo = Color(0xFF000000);
-  static const Color grisSuave = Color(0xFFD3D3D3);
-}
+import 'package:caribe/model/user_class.dart';
+import 'package:caribe/pages/login_page.dart';
+import 'package:caribe/pages/home_art_page.dart';
+import 'package:caribe/styles/app_colors.dart';
 
 class Registro extends StatefulWidget {
   const Registro({super.key});
@@ -54,7 +45,7 @@ class _RegistroState extends State<Registro> {
       } else {
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const Home()),
+          MaterialPageRoute(builder: (context) => const UserHomePage()),
         );
       }
     }

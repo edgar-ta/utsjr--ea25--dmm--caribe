@@ -1,18 +1,9 @@
+import 'package:caribe/pages/user_pages/user_home_page.dart';
 import 'package:flutter/material.dart';
-import 'package:caribe/model/user_class.dart'; // Importa el modelo User
-import 'package:caribe/pages/home_page.dart'; // Importa la pantalla Home
+import 'package:caribe/model/user_class.dart';
 import 'package:caribe/pages/sign_page.dart';
-import 'package:caribe/pages/home_art_page.dart'; // Importa la pantalla Home para artesanos
-
-// Definimos los colores globales de la aplicación
-class AppColors {
-  static const Color azulCieloTropical = Color(0xFF87CEEB);
-  static const Color naranjaAtardecer = Color(0xFFFF8C00);
-  static const Color arenaCalida = Color(0xFFF5F5DC);
-  static const Color blancoNitido = Color(0xFFFFFFFF);
-  static const Color negroProfundo = Color(0xFF000000);
-  static const Color grisSuave = Color(0xFFD3D3D3);
-}
+import 'package:caribe/pages/home_art_page.dart';
+import 'package:caribe/styles/app_colors.dart';
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -54,7 +45,7 @@ class _LoginState extends State<Login> {
         if (user.tipo == 'usuario') {
           Navigator.pushReplacement(
             context,
-            MaterialPageRoute(builder: (context) => const Home()),
+            MaterialPageRoute(builder: (context) => const UserHomePage()),
           );
         } else if (user.tipo == 'artesano') {
           Navigator.pushReplacement(

@@ -6,18 +6,18 @@ class SectionTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          title,
-          style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+    return Padding(
+      padding: const EdgeInsets.symmetric(
+        vertical: 8.0,
+        horizontal: 32,
+      ),
+      child: Text(
+        title,
+        style: TextStyle(
+          fontSize: 36,
+          fontWeight: FontWeight.bold,
         ),
-        Text(
-          'Ver más',
-          style: TextStyle(fontSize: 16, color: Colors.grey),
-        ),
-      ],
+      ),
     );
   }
 }

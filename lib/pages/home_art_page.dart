@@ -2,15 +2,7 @@ import 'package:caribe/components/craft_card.dart';
 import 'package:caribe/model/craft_class.dart';
 import 'package:caribe/pages/sign_page.dart';
 import 'package:flutter/material.dart';
-
-class AppColors {
-  static const Color azulCieloTropical = Color(0xFF87CEEB);
-  static const Color naranjaAtardecer = Color(0xFFFF8C00);
-  static const Color arenaCalida = Color(0xFFF5F5DC);
-  static const Color blancoNitido = Color(0xFFFFFFFF);
-  static const Color negroProfundo = Color(0xFF000000);
-  static const Color grisSuave = Color(0xFFD3D3D3);
-}
+import 'package:caribe/styles/app_colors.dart';
 
 class ArtesanoHome extends StatefulWidget {
   const ArtesanoHome({super.key});
@@ -82,40 +74,6 @@ class ProductosScreen extends StatefulWidget {
 }
 
 class _ProductosScreenState extends State<ProductosScreen> {
-  // Productos de ejemplo
-  List<CraftClass> productos = [
-    CraftClass(
-      imageUrl: 'https://via.placeholder.com/150', // Imagen ficticia
-      artisanName: 'Artesano 1',
-      profileImageUrl:
-          'https://via.placeholder.com/50', // Imagen ficticia del artesano
-      price: 150.00,
-      title: 'Vaso de Cerámica',
-      rating: 4.5,
-      reviews: 12,
-    ),
-    CraftClass(
-      imageUrl: 'https://via.placeholder.com/150', // Imagen ficticia
-      artisanName: 'Artesano 2',
-      profileImageUrl:
-          'https://via.placeholder.com/50', // Imagen ficticia del artesano
-      price: 250.00,
-      title: 'Bolso de Cuero',
-      rating: 4.8,
-      reviews: 8,
-    ),
-    CraftClass(
-      imageUrl: 'https://via.placeholder.com/150', // Imagen ficticia
-      artisanName: 'Artesano 3',
-      profileImageUrl:
-          'https://via.placeholder.com/50', // Imagen ficticia del artesano
-      price: 300.00,
-      title: 'Colgante de Plata',
-      rating: 4.0,
-      reviews: 15,
-    ),
-  ];
-
   // Variables para almacenar el producto seleccionado y sus datos editados
   CraftClass? selectedProduct;
   TextEditingController titleController = TextEditingController();
@@ -129,13 +87,13 @@ class _ProductosScreenState extends State<ProductosScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            if (productos.isNotEmpty) ...[
+            if (CraftClass.crafts.isNotEmpty) ...[
               // Si hay productos, muestra la lista de productos
               Expanded(
                 child: ListView.builder(
-                  itemCount: productos.length,
+                  itemCount: CraftClass.crafts.length,
                   itemBuilder: (context, index) {
-                    return CraftCard(craft: productos[index]);
+                    return CraftCard(craft: CraftClass.crafts[index]);
                   },
                 ),
               ),
@@ -217,8 +175,9 @@ class _ProductosScreenState extends State<ProductosScreen> {
                             }
                           });
                         },
-                        items: productos.map<DropdownMenuItem<CraftClass>>(
-                            (CraftClass product) {
+                        items: CraftClass.crafts
+                            .map<DropdownMenuItem<CraftClass>>(
+                                (CraftClass product) {
                           return DropdownMenuItem<CraftClass>(
                             value: product,
                             child: Text(product.title),

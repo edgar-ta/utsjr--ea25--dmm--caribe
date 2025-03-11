@@ -1,5 +1,12 @@
+import 'package:caribe/components/iconic_button.dart';
+import 'package:caribe/components/price_tag.dart';
+import 'package:caribe/components/rating_indicator.dart';
+import 'package:caribe/components/units_indicator.dart';
+import 'package:caribe/model/artisan_class.dart';
+import 'package:caribe/styles/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:caribe/model/craft_class.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
 class CraftCard extends StatelessWidget {
   final CraftClass craft;
@@ -8,67 +15,94 @@ class CraftCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ArtisanClass artisan = craft.getArtisan();
+
     return Card(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          // Imagen más pequeña
-          ClipRRect(
-            borderRadius: BorderRadius.circular(8.0),
-            child: Image.asset(
-              craft.imageUrl,
-              height: 120, // Altura reducida de la imagen
-              width: double.infinity,
+      child: SizedBox(
+        height: 450,
+        child: Column(
+          children: [
+            Image.network(
+              craft.imageUrl!,
               fit: BoxFit.cover,
+              height: 200,
+              width: double.infinity,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Título más pequeño
-                Text(
-                  craft.title,
-                  style: const TextStyle(
-                    fontSize: 14, // Tamaño de fuente reducido
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                // Precio más pequeño
-                Text(
-                  '\$${craft.price.toStringAsFixed(2)}',
-                  style: const TextStyle(
-                    fontSize: 12, // Tamaño de fuente reducido
-                    color: Colors.grey,
-                  ),
-                ),
-                // Nombre del artesano más pequeño
-                Text(
-                  craft.artisanName,
-                  style: const TextStyle(
-                    fontSize: 12, // Tamaño de fuente reducido
-                    color: Colors.grey,
-                  ),
-                ),
-                // Rating y reseñas más pequeños
-                Row(
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.all(12),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(Icons.star,
-                        color: Colors.amber, size: 14), // Icono más pequeño
-                    const SizedBox(width: 4),
-                    Text(
-                      '${craft.rating} (${craft.reviews} reseñas)',
-                      style: const TextStyle(
-                        fontSize: 12, // Tamaño de fuente reducido
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundImage:
+                                  NetworkImage(artisan.profilePicture!),
+                              radius: 20,
+                            ),
+                            SizedBox(width: 10),
+                            Text(
+                              artisan.name,
+                              softWrap: true,
+                              style: TextStyle(
+                                fontSize: 18,
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          width: 12,
+                        ),
+                        PriceTag(price: craft.price),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Expanded(
+                      child: Text(
+                        craft.title,
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    Row(
+                      children: [
+                        Expanded(
+                          child: RatingIndicator(rating: craft.rating),
+                        ),
+                        SizedBox(
+                          width: 6,
+                        ),
+                        UnitsIndicator(
+                          value: craft.reviews.toDouble(),
+                          unit: "reseña",
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 12,
+                    ),
+                    IconicButton(
+                      label: "Añadir al carrito",
+                      icon: Icons.shopping_cart,
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
-        ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }
